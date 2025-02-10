@@ -1,75 +1,21 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
+from litellm import completion
+
+# Function to access the azure api key and get a response from the model
+def model_4o(enquire):
+    response = completion(
+        api_key=os.getenv("API_KEY"),# your api key
+        base_url="http://18.216.253.243:4000/",
+        model="gpt-4o", #could be changed to any model you want
+        custom_llm_provider="openai",
+        messages=[{"content": enquire, "role": "user"}]
+    )
+    return response
 
 # Load environment variables from .env file
 load_dotenv()
-
-# Retrieve API key
-API_KEY = os.getenv("API_KEY")
-
-
-st.markdown(
-    """
-    <style>
-        /* Background Color */
-        .stApp {
-            background-color: #f5f7f4;
-        }
-
-        /* Chat Title */
-        .stMarkdown h1 {
-            color: #333333;
-            font-weight: bold;
-        }
-
-        /* Chat Input Field */
-        .stChatInputContainer {
-            background-color: #e3ede4 !important;
-            border: 2px solid #5c7063 !important;
-            border-radius: 10px;
-        }
-
-        /* Chat Messages */
-        .stChatMessage {
-            background-color: #dbe6d5;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 8px;
-            color: #333333;
-        }
-
-        /* User Chat Message (red background) */
-        .stChatMessageUser {
-            background-color: #e57373 !important;
-            color: white !important;
-        }
-
-        /* Assistant Chat Message (light yellow background) */
-        .stChatMessageAssistant {
-            background-color: #fdd835 !important;
-            color: #333333 !important;
-        }
-
-        /* Chat Input Box */
-        .stChatInputContainer textarea {
-            color: #333333 !important;
-            background-color: #e3ede4 !important;
-            border-radius: 8px !important;
-            padding: 10px !important;
-        }
-
-        /* Chat Submit Button */
-        .stButton>button {
-            background-color: #5c7063;
-            color: white;
-            border-radius: 10px;
-            padding: 10px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Streamlit App Title
 st.title("EcoValid")
@@ -91,8 +37,11 @@ if prompt := st.chat_input("Chat with Eco..."):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
+    # Call the function to get the chatbot result 
+    result = model_4o(prompt)
+
     # Make an API request using the API key (Example usage)
-    response = f"Eco: {prompt}"  # Placeholder response
+    response = f"Eco: {result['choices'][0]['message']['content']}"  # Placeholder response
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
