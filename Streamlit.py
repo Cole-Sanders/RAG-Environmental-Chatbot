@@ -17,6 +17,17 @@ def model_4o(enquire):
 # Load environment variables from .env file
 load_dotenv()
 
+# Function to load CSS from external file
+def load_css(file_name):
+    with open(file_name, "r") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+
+# Load external CSS
+load_css("frontend/styles.css")
+
+
 # Streamlit App Title
 st.title("EcoValid")
 
