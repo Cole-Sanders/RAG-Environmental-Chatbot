@@ -29,6 +29,36 @@ def load_css(file_name):
 # Load CSS file
 load_css("frontend/styles.css")
 
+# Function to load CSS from external file
+def load_css(file_name):
+    with open(file_name, "r") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+
+# Load external CSS
+load_css("frontend/pages/styles.css")
+
+# # Add custom HTML for Share button only
+# share_button_html = """
+# <div style="position: fixed; top: 10px; right: 15px; z-index: 1000;">
+#     <button style="
+#         background-color: #5c7063; 
+#         color: white; 
+#         border: none; 
+#         border-radius: 5px; 
+#         padding: 8px 16px; 
+#         font-size: 14px; 
+#         cursor: pointer;
+#     ">
+#         Share
+#     </button>
+# </div>
+# """
+
+# # Render the Share button in Streamlit
+# st.markdown(share_button_html, unsafe_allow_html=True)
+
 # Streamlit App Title
 st.title("EcoValid")
 
