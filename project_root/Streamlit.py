@@ -25,7 +25,7 @@ def load_css(file_name):
 
 
 # Load external CSS
-load_css("frontend/styles.css")
+load_css("frontend/pages/styles.css")
 
 # # Add custom HTML for Share button only
 # share_button_html = """
