@@ -1,0 +1,67 @@
+/* Remove Streamlit default dark header/footer */
+header, footer {visibility: hidden;}
+
+
+/* Background Color */
+.stApp {
+   background-color: #f5f7f4 !important;
+}
+
+
+/* Title Styling */
+h1 {
+   color: #333333 !important;
+   font-weight: bold;
+}
+
+
+/* Chat Input Styling */
+.stChatInputContainer {
+   background-color: #eb14a0 !important;
+   border: 2px solid #5c7063 !important;
+   border-radius: 10px !important;
+   padding: 12px !important;
+}
+
+
+/* Chat Input Box */
+.stChatInputContainer textarea {
+   color: #333333 !important;
+   background-color: #e3ede4 !important;
+   border-radius: 8px !important;
+   padding: 10px !important;
+}
+
+
+/* User Chat Message */
+.stChatMessageUser {
+   background-color: #dbe6d5 !important;
+   border-radius: 10px !important;
+   padding: 12px !important;
+   color: #333333 !important;
+}
+
+
+/* Assistant Chat Message */
+.stChatMessageAssistant {
+   background-color: #eaf1e5 !important;
+   border-radius: 10px !important;
+   padding: 12px !important;
+   color: #333333 !important;
+}
+
+
+/* Chat Submit Button */
+.stButton>button {
+   background-color: #5c7063 !important;
+   color: white !important;
+   border-radius: 10px !important;
+   padding: 12px !important;
+   border: none !important;
+}
+
+
+/* Remove red border from input */
+.stChatInputContainer {
+   border: none !important;
+}
