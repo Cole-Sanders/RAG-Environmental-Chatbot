@@ -27,16 +27,6 @@ def load_css(file_name):
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 # Load CSS file
-load_css("frontend/styles.css")
-
-# Function to load CSS from external file
-def load_css(file_name):
-    with open(file_name, "r") as f:
-        css = f.read()
-    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-
-
-# Load external CSS
 load_css("frontend/pages/styles.css")
 
 # # Add custom HTML for Share button only
@@ -107,7 +97,7 @@ if st.session_state.role != "Select an option":
         # Create a placeholder for assistant response
         response_placeholder = st.empty()
 
-        with st.chat_message("assistant", avatar="frontend/bird.jpg"):  # Set custom chatbot icon
+        with st.chat_message("assistant", avatar="frontend/components/bird.jpg"):  # Set custom chatbot icon
             # Display a spinner while generating a response
             spinner_placeholder = st.markdown("<div class='loader'></div> Generating...", unsafe_allow_html=True)
 
