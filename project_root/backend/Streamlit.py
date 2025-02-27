@@ -1,7 +1,11 @@
 import streamlit as st
 import os
+import requests
 from dotenv import load_dotenv
 from litellm import completion
+
+#URL to FastAPI server
+url = "http://localhost:8000/query"
 
 # Set page title and favicon
 st.set_page_config(page_title="EcoValid", page_icon="🌿")  
@@ -10,27 +14,41 @@ st.set_page_config(page_title="EcoValid", page_icon="🌿")
 load_dotenv()
 
 # Function to access the azure api key and get a response from the model
-def model_4o(enquire):
+def model_4o(enquire, save):
 
-    # Retrieve stored conversation history
-    messages = st.session_state.conversation_memory
+    #For user input.
+    if save:
+        # Retrieve stored conversation history
+        messages = st.session_state.conversation_memory
 
-    # Append new user message
-    messages.append({"role": "user", "content": enquire})
+        # Append new user message
+        messages.append({"role": "user", "content": enquire})
 
-    response = completion(
-        api_key=os.getenv("API_KEY"),# your api key
-        base_url="http://18.216.253.243:4000/",
-        model="gpt-4o", #could be changed to any model you want
-        custom_llm_provider="openai",
-        messages=messages
-    )
+        response = completion(
+            api_key=os.getenv("API_KEY"),# your api key
+            base_url="http://18.216.253.243:4000/",
+            model="gpt-4o", #could be changed to any model you want
+            custom_llm_provider="openai",
+            messages=messages
+        )
+        
+        # Append new user message
+        messages.append({"role": "user", "content": enquire})
     
-    # Append assistant response to history
-    assistant_response = response["choices"][0]["message"]["content"]
-    messages.append({"role": "assistant", "content": assistant_response})
+        # Append assistant response to history
+        messages.append({"role": "assistant", "content": response["choices"][0]["message"]["content"]})
+    
+    #For prompt engineering.
+    else:
+        response = completion(
+            api_key=os.getenv("API_KEY"),# your api key
+            base_url="http://18.216.253.243:4000/",
+            model="gpt-4o", #could be changed to any model you want
+            custom_llm_provider="openai",
+            messages=[{"content": enquire, "role": "user"}]
+        )
 
-    return assistant_response
+    return response
 
 
 # Function to load CSS from external file
@@ -95,7 +113,24 @@ if st.session_state.role != "Select an option":
             spinner_placeholder = st.markdown("<div class='loader'></div> Generating...", unsafe_allow_html=True)
 
             # Call function with memory support
-            response = model_4o(prompt)
+
+            #Check if the prompt is an environmental query.
+            instruction = "Then next prompt will be a string. Answer if it is a technical question about enviornmental impact data. (Answer with \"yes\" or \"no\".)"
+            classification = model_4o(instruction + prompt, False)
+            classification_text = classification["choices"][0]["message"]["content"].strip().lower()
+
+            #If it is, route to RAG.
+            if classification_text.startswith("yes"):
+                query_text = prompt
+                query = {"query": query_text}
+                response = requests.post(url, json=query)
+                response = model_4o("Answer this question: " + prompt + "Using: " + response.json()["response"], True)
+                response = f"Eco(RAG): {response['choices'][0]['message']['content']}"
+            #If not, route to GPT.
+            else:
+                response = model_4o(prompt, True)
+                response = f"Eco(GPT): {response['choices'][0]['message']['content']}"
+
 
             spinner_placeholder.empty()
             response_placeholder.markdown(f"<div class='assistant-message'>{response}</div>", unsafe_allow_html=True)

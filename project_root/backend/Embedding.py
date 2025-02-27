@@ -14,10 +14,10 @@ Settings.llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-3.5-turbo"
 reader = JSONReader()
 
 # Load data from JSON file
-documents = reader.load_data(input_file="Data.json", extra_info={})
+documents = reader.load_data(input_file="project_root/backend/Data.json", extra_info={})
 
 # Create or Load the Index
-index_path = "storage"
+index_path = "project_root/backend/storage"
 
 if os.path.exists(index_path):  # Load existing index if present
     storage_context = StorageContext.from_defaults(persist_dir=index_path)
