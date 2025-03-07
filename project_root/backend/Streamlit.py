@@ -32,8 +32,6 @@ def model_4o(enquire, save):
             messages=messages
         )
         
-        # Append new user message
-        messages.append({"role": "user", "content": enquire})
     
         # Append assistant response to history
         messages.append({"role": "assistant", "content": response["choices"][0]["message"]["content"]})
@@ -121,11 +119,32 @@ if st.session_state.role != "Select an option":
 
             #If it is, route to RAG.
             if classification_text.startswith("yes"):
-                query_text = prompt
+                #Return the process name and location for each possible answer.
+                query_text = prompt + ". Additionally return the process name and process location of the answer."
                 query = {"query": query_text}
+                print(query)
                 response = requests.post(url, json=query)
-                response = model_4o("Answer this question: " + prompt + "Using: " + response.json()["response"], True)
-                response = f"Eco(RAG): {response['choices'][0]['message']['content']}"
+                print(response.json())
+                #print(response.json()["response"])
+                
+                #query_text = prompt
+                #query = {"query": query_text}
+                #response = requests.post(url, json=query)
+                str = response.json()["response"]
+                classification = model_4o("Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)", False)
+                classification_text = classification["choices"][0]["message"]["content"].strip().lower()
+
+                if classification_text.startswith("no"):
+                    str = "Sorry! We do not have that data."
+                
+                # Retrieve stored conversation history
+                messages = st.session_state.conversation_memory
+                # Append new user message
+                messages.append({"role": "user", "content": prompt})
+                messages.append({"role": "assistant", "content": str})
+                response = f"Eco(RAG): {str}"
+
+                
             #If not, route to GPT.
             else:
                 response = model_4o(prompt, True)
