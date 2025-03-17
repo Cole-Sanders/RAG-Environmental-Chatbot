@@ -14,40 +14,38 @@ st.set_page_config(page_title="EcoValid", page_icon="🌿")
 load_dotenv()
 
 # Function to access the azure api key and get a response from the model
-def model_4o(enquire, save):
+def model_4o(enquire, memory):
 
-    #For user input.
-    if save:
-        # Retrieve stored conversation history
+    if memory:
         messages = st.session_state.conversation_memory
-
-        # Append new user message
-        messages.append({"role": "user", "content": enquire})
-
-        response = completion(
-            api_key=os.getenv("API_KEY"),# your api key
-            base_url="http://18.216.253.243:4000/",
-            model="gpt-4o", #could be changed to any model you want
-            custom_llm_provider="openai",
-            messages=messages
-        )
-        
-    
-        # Append assistant response to history
-        messages.append({"role": "assistant", "content": response["choices"][0]["message"]["content"]})
-    
-    #For prompt engineering.
     else:
-        response = completion(
-            api_key=os.getenv("API_KEY"),# your api key
-            base_url="http://18.216.253.243:4000/",
-            model="gpt-4o", #could be changed to any model you want
-            custom_llm_provider="openai",
-            messages=[{"content": enquire, "role": "user"}]
-        )
+        messages = [{"role": "user", "content": enquire}]
+
+    response = completion(
+        api_key=os.getenv("API_KEY"),# your api key
+        base_url="http://18.216.253.243:4000/",
+        model="gpt-4o", #could be changed to any model you want
+        custom_llm_provider="openai",
+        messages=messages
+    )
 
     return response
 
+
+def recordInput(userInput):
+    # Retrieve stored conversation history
+    messages = st.session_state.conversation_memory
+    # Append new user message
+    messages.append({"role": "user", "content": userInput})
+
+
+def recordOutput(chatbotOutput):
+    # Retrieve stored conversation history
+    messages = st.session_state.conversation_memory
+    # Append assistant response to history
+    messages.append({"role": "assistant", "content": chatbotOutput})
+    
+    
 
 # Function to load CSS from external file
 def load_css(file_name):
@@ -101,6 +99,8 @@ for message in st.session_state.conversation_memory:
 # React to user input (only after role selection)
 if st.session_state.role != "Select an option":
     if prompt := st.chat_input("Chat with Eco..."):
+        # Record user input
+        recordInput(prompt)
         # Display user message
         with st.chat_message("user"):
             st.markdown(f"<p style='margin:0; padding:10px;'>{prompt}</p>", unsafe_allow_html=True)
@@ -122,10 +122,7 @@ if st.session_state.role != "Select an option":
                 #Return the process name and location for each possible answer.
                 query_text = prompt + ". Additionally return the process name and process location of the answer."
                 query = {"query": query_text}
-                print(query)
                 response = requests.post(url, json=query)
-                print(response.json())
-                #print(response.json()["response"])
                 
                 #query_text = prompt
                 #query = {"query": query_text}
@@ -137,19 +134,21 @@ if st.session_state.role != "Select an option":
                 if classification_text.startswith("no"):
                     str = "Sorry! We do not have that data."
                 
-                # Retrieve stored conversation history
-                messages = st.session_state.conversation_memory
-                # Append new user message
-                messages.append({"role": "user", "content": prompt})
-                messages.append({"role": "assistant", "content": str})
+               
                 response = f"Eco(RAG): {str}"
+                recordOutput(response)
+                
 
                 
             #If not, route to GPT.
             else:
-                response = model_4o(prompt, True)
-                response = f"Eco(GPT): {response['choices'][0]['message']['content']}"
-
+                answer = model_4o(prompt, True)
+                response = f"Eco(GPT): {answer['choices'][0]['message']['content']}"
+                
+                recordOutput(answer['choices'][0]['message']['content'])
+                
+            messages = st.session_state.conversation_memory
+            print(messages)
 
             spinner_placeholder.empty()
             response_placeholder.markdown(f"<div class='assistant-message'>{response}</div>", unsafe_allow_html=True)
