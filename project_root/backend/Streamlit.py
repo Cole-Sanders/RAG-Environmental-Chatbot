@@ -123,17 +123,15 @@ if st.session_state.role != "Select an option":
                 query_text = prompt + ". Additionally return the process name and process location of the answer."
                 query = {"query": query_text}
                 response = requests.post(url, json=query)
-                
-                #query_text = prompt
-                #query = {"query": query_text}
-                #response = requests.post(url, json=query)
                 str = response.json()["response"]
                 classification = model_4o("Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)", False)
                 classification_text = classification["choices"][0]["message"]["content"].strip().lower()
-
                 if classification_text.startswith("no"):
                     str = "Sorry! We do not have that data."
-                
+                elif st.session_state.role == "Researcher":
+                    str = model_4o("Use the following answer to answer a user query but with more context:" + str + " Keep the response under two sentences and data focused.", False)["choices"][0]["message"]["content"]
+                elif st.session_state.role == "Policy Maker":
+                    str = model_4o("Use the following answer to answer a user query but with more context:" + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact.", False)["choices"][0]["message"]["content"]
                
                 response = f"Eco(RAG): {str}"
                 recordOutput(response)
@@ -146,9 +144,8 @@ if st.session_state.role != "Select an option":
                 response = f"Eco(GPT): {answer['choices'][0]['message']['content']}"
                 
                 recordOutput(answer['choices'][0]['message']['content'])
-                
-            messages = st.session_state.conversation_memory
-            print(messages)
+
+            print(st.session_state.role)    
 
             spinner_placeholder.empty()
             response_placeholder.markdown(f"<div class='assistant-message'>{response}</div>", unsafe_allow_html=True)
