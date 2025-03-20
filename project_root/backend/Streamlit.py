@@ -113,14 +113,14 @@ if st.session_state.role != "Select an option":
             # Call function with memory support
 
             #Check if the prompt is an environmental query.
-            instruction = "Then next prompt will be a string. Answer if it is a technical question about enviornmental impact data. (Answer with \"yes\" or \"no\".)"
+            instruction = "Does the following prompt ask a technical question about environmental impact data? (Answer with \"yes\" or \"no\".)"
             classification = model_4o(instruction + prompt, False)
             classification_text = classification["choices"][0]["message"]["content"].strip().lower()
 
             #If it is, route to RAG.
             if classification_text.startswith("yes"):
                 #Return the process name and location for each possible answer.
-                query_text = prompt + ". Additionally return the process name and process location of the answer."
+                query_text = prompt + ". Also return the process name and process location of the answer."
                 query = {"query": query_text}
                 response = requests.post(url, json=query)
                 str = response.json()["response"]
