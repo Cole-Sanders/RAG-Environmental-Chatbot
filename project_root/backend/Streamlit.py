@@ -83,15 +83,19 @@ with st.sidebar:
         st.session_state.role = role
         st.session_state.conversation_memory = []  # Reset conversation when role changes
         st.rerun()
+    
+
 
 # Display chat messages from memory
 for message in st.session_state.conversation_memory:
+    print(st.session_state.conversation_memory)
     # with st.chat_message(message["role"]):
     #     st.markdown(f"<p style='margin:0; padding:10px;'>{message['content']}</p>", unsafe_allow_html=True)
 
     if message["role"] == "user":
         with st.chat_message("user"):
             st.markdown(f"<p style='margin:0; padding:10px;'>{message['content']}</p>", unsafe_allow_html=True)
+            temp = 3
     else:
         with st.chat_message("assistant", avatar="frontend/components/bird.jpg"):  # Custom bot icon here
             st.markdown(f"<div class='assistant-message'>Eco: {message['content']}</div>", unsafe_allow_html=True)
@@ -104,6 +108,7 @@ if st.session_state.role != "Select an option":
         # Display user message
         with st.chat_message("user"):
             st.markdown(f"<p style='margin:0; padding:10px;'>{prompt}</p>", unsafe_allow_html=True)
+            # st.markdown(f"<p style='margin:0; padding:10px;'>abcdefg</p>", unsafe_allow_html=True)
 
         # Generate response using updated function
         with st.chat_message("assistant", avatar="frontend/components/bird.jpg"):
