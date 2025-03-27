@@ -88,7 +88,6 @@ with st.sidebar:
 
 # Display chat messages from memory
 for message in st.session_state.conversation_memory:
-    print(st.session_state.conversation_memory)
     # with st.chat_message(message["role"]):
     #     st.markdown(f"<p style='margin:0; padding:10px;'>{message['content']}</p>", unsafe_allow_html=True)
 
@@ -102,6 +101,7 @@ for message in st.session_state.conversation_memory:
 
 # React to user input (only after role selection)
 if st.session_state.role != "Select an option":
+    thinkTrej = "<br><br>Thinking Trejectory:<br>"
     if prompt := st.chat_input("Chat with Eco..."):
         # Record user input
         recordInput(prompt)
@@ -118,39 +118,50 @@ if st.session_state.role != "Select an option":
             # Call function with memory support
 
             #Check if the prompt is an environmental query.
-            instruction = "Does the following prompt ask a technical question about environmental impact data? (Answer with \"yes\" or \"no\".)"
+            instruction = "Does the following prompt ask a technical question about environmental impact data? (Answer with \"yes\" or \"no\".) "
             classification = model_4o(instruction + prompt, False)
             classification_text = classification["choices"][0]["message"]["content"].strip().lower()
+
+            thinkTrej = thinkTrej + "LLM input: " + instruction + prompt + "<br>" + "LLM response: " + classification_text
 
             #If it is, route to RAG.
             if classification_text.startswith("yes"):
                 #Return the process name and location for each possible answer.
-                query_text = prompt + ". Also return the process name and process location of the answer."
+                query_text = prompt + " Also return the process name and process location of the answer."
+                thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
                 query = {"query": query_text}
                 response = requests.post(url, json=query)
                 str = response.json()["response"]
+                thinkTrej = thinkTrej + "<br>RAG output:" + str
                 classification = model_4o("Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)", False)
+                thinkTrej = thinkTrej + "<br>LLM input: " + "Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)"
                 classification_text = classification["choices"][0]["message"]["content"].strip().lower()
+                thinkTrej = thinkTrej + "<br>LLM output: " + classification_text
                 if classification_text.startswith("no"):
                     str = "Sorry! We do not have that data."
                 elif st.session_state.role == "Researcher":
-                    str = model_4o("Use the following answer to answer a user query but with more context:" + str + " Keep the response under two sentences and data focused.", False)["choices"][0]["message"]["content"]
+                    str = model_4o("Respond using the information in the following answer: " + str + " Keep the response under two sentences and data focused.", False)["choices"][0]["message"]["content"]
+                    thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences and data focused."
+                    thinkTrej = thinkTrej + "<br>LLM output: " + str
                 elif st.session_state.role == "Policy Maker":
-                    str = model_4o("Use the following answer to answer a user query but with more context:" + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact.", False)["choices"][0]["message"]["content"]
+                    str = model_4o("Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact.", False)["choices"][0]["message"]["content"]
+                    thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact."
+                    thinkTrej = thinkTrej + "<br>LLM output: " + str
                
-                response = f"Eco(RAG): {str}"
+                response = f"Eco(RAG): {str + thinkTrej}"
+                
                 recordOutput(response)
                 
 
                 
             #If not, route to GPT.
             else:
+                thinkTrej = thinkTrej + "<br>LLM input: " + prompt
                 answer = model_4o(prompt, True)
-                response = f"Eco(GPT): {answer['choices'][0]['message']['content']}"
-                
+                response = f"Eco(GPT): {answer['choices'][0]['message']['content'] + thinkTrej}"
+                thinkTrej = thinkTrej + "<br>LLM output: " + answer['choices'][0]['message']['content']
                 recordOutput(answer['choices'][0]['message']['content'])
-
-            print(st.session_state.role)    
-
+   
+            thinkTrej = ""
             spinner_placeholder.empty()
             response_placeholder.markdown(f"<div class='assistant-message'>{response}</div>", unsafe_allow_html=True)
