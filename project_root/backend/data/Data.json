@@ -1,0 +1,1442 @@
+[
+  {
+      "process_name": "maintenance, lorry 28 metric ton | maintenance, lorry 28 metric ton | Cutoff, U",
+      "process_id": "855e0015-da07-3056-ad7e-bd970ae9f0c5",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 33466.8407855638,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 10.0666002240032,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 11644.867421634288,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.013044944531408498,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 585.6861241015079,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 49.58540768103865,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00703919336004984,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0003472590715945603,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 54.722411969118795,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 490790.5625670391,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 16 metric ton | maintenance, lorry 16 metric ton | Cutoff, U",
+      "process_id": "e40c7d4e-412a-3fd0-98b1-88329bb3c630",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "Europe without Switzerland",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 25178.92926191236,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 9.023088465138823,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 12082.160515771466,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.007960553129080717,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 622.4894215882889,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 62.01994860240509,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.006949072190957554,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00027756629912707107,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 57.26599325252317,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 361387.79708217666,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, lorry 40 metric ton | maintenance, lorry 40 metric ton | Cutoff, U",
+      "process_id": "faf6bf7e-fb7c-399b-b70b-99eb428f98f2",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 62331.21827823749,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 25.948147663449717,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 28178.008674994548,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.01780375136524412,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 1516.4799734947117,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 134.25813540630008,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.011353377693746156,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0006174841751010276,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 124.84939568753983,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 707562.7528570988,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, lorry 28 metric ton | maintenance, lorry 28 metric ton | Cutoff, U",
+      "process_id": "34c3d4c5-49fb-3d7b-a889-3121611b2ba3",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 36984.92938967939,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 19.65408623413259,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 20386.799872055435,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.014023538515058442,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 1134.3429808054975,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 103.76479900441194,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.009018611006549814,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.000372006275528688,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 86.71486039896246,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 538995.2790475091,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, electric bicycle | maintenance, electric bicycle | Cutoff, U",
+      "process_id": "5b19be6f-61fc-33a4-b18e-aaec9d771cef",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 121.48266951266359,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.11977442172179718,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 93.00536019795037,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 5.813327321234647e-05,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 6.014564334747595,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.6316858466407864,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 6.645149363251489e-05,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 2.54157702517337e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 0.5619229214571282,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 6141.280151738401,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, bus | maintenance, bus | Cutoff, U",
+      "process_id": "10279c8f-4ef2-3314-ae11-97f559673e75",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 50865.671186353204,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 72.9949273432663,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 59380.62669587902,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.01113799843009139,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 3262.3953619077033,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 263.05330482187867,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.01881156465444915,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0008098036287204743,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 284.41880890133393,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 1203054.0485864414,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 16 metric ton | maintenance, lorry 16 metric ton | Cutoff, U",
+      "process_id": "cd699c36-be02-3855-9b97-dea0756bb4a3",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 21735.30944656137,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 6.154775101013667,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 7186.4821897939955,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.007433834959140697,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 364.4135314610514,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 32.74214792812875,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00569791922269575,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00023045478626305304,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 33.77341418999445,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 333556.986639216,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, lorry 16 metric ton | maintenance, lorry 16 metric ton | Cutoff, U",
+      "process_id": "92d545de-6771-393d-973e-0c6e0d3191a9",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RER",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 25178.92926191717,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 9.023088465141546,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 12082.160515776124,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.007960553129081505,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 622.4894215884792,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 62.019948602424144,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.006949072190959007,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.000277566299127157,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 57.26599325255773,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 361387.79708224075,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 40 metric ton | maintenance, lorry 40 metric ton | Cutoff, U",
+      "process_id": "2e79d00e-1546-3369-b3f4-007958516142",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 58847.62355325259,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 16.219173484855453,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 19395.079715307864,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.01681957084596333,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 961.9522809655468,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 79.64546749213329,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00935857031418637,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.000600021494711259,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 92.55895882147452,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 659078.547180902,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, electric scooter, without battery | maintenance, electric scooter, without battery | Cutoff, U",
+      "process_id": "c13c2d88-65bb-3251-8b41-92df81535d7b",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 539.5409617065096,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.16940473099470862,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 334.0041087808986,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00012626805274138495,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 9.763137212934943,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.7599708225335112,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00036625259231810864,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 5.456849926398848e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 1.0254158848034525,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 14833.485534710318,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, motor scooter | maintenance, motor scooter | Cutoff, U",
+      "process_id": "c6f83107-4ff8-3a7a-94b7-cab799324cd2",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 541.025930099019,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.17413696431405737,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 262.2197722271458,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00012702980984776954,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 9.701147239375468,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.7898978111939077,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00023413119789901873,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 5.505258502082143e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 1.0370992690859744,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 10737.419536303936,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, bus | maintenance, bus | Cutoff, U",
+      "process_id": "af3d60b3-dd0e-3f6e-9987-0bbd28b741a7",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 50561.514258274714,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 72.41980555530623,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 58946.0501970172,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.011073749085004879,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 3237.5911568348142,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 261.1061178044335,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.018707791955342078,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0008049619416204676,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 282.35037566108696,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 1200644.5124235684,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for passenger car maintenance | passenger car maintenance | Cutoff, U",
+      "process_id": "36b28864-673a-3fa2-a80e-f2512d6ad5ec",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 2445.4158961900453,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 1.2624793070416063,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 1371.711341813009,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00045391130363833077,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 60.895061666512866,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 5.243903931976508,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0011171379835258457,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 9.322273579023444e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 8.272629899747026,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 72216.40319928771,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, electric scooter, without battery | maintenance, electric scooter, without battery | Cutoff, U",
+      "process_id": "defbe14c-8efe-3b03-bf7f-21033fceb601",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 539.5409617065235,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.16940473099470116,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 334.0041087809023,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.000126268052741386,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 9.763137212934868,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.7599708225334936,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00036625259231811016,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 5.456849926399078e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 1.0254158848035078,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 14833.48553471043,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, passenger car | passenger car maintenance | Cutoff, U",
+      "process_id": "1c3d74d2-59b4-3b13-a93c-dde5bd495df3",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RER",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 2344.8697531185635,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.6457787845896252,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 1165.7656930869223,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.0004164996021308665,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 40.98365056304337,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 3.9270027758742216,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0010572763800292312,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 9.304690650243551e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 5.767355958824823,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 72750.67226415765,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, light commercial vehicle | maintenance, light commercial vehicle | Cutoff, U",
+      "process_id": "bd68def2-e0a9-32ef-8e2d-8fd7c3fe3d9b",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 7670.450041068014,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 10.000218035106904,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 7694.572527502356,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.001739636892558361,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 441.4545732581468,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 34.24984981635266,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0026093135352939587,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00010919406089103058,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 35.28834388063864,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 169155.6583857357,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, passenger car, electric, without battery | maintenance, passenger car, electric, without battery | Cutoff, U",
+      "process_id": "2dbeb230-0131-3747-b3e7-d6d080df4bb2",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 2048.5930976720106,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 1.2606624851352686,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 1030.2041426782584,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00038811197754967436,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 393.88343359696074,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 4.145581793309442,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00039656494948282637,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 2.171402672833582e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 9.21674668878002,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 24251.606180254363,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, light commercial vehicle | maintenance, light commercial vehicle | Cutoff, U",
+      "process_id": "d9ead653-75a9-30f9-9942-8b0c0ce1238a",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RER",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 6083.008268379178,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 2.781336389314803,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 3731.524696358057,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.0012279184847513499,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 170.68347562831556,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 17.373554614188773,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0019142332122104144,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 8.648902817053641e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 25.698241793279713,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 156748.3749922489,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, light commercial vehicle | maintenance, light commercial vehicle | Cutoff, U",
+      "process_id": "cc31a313-a0a5-39ea-8783-cfa56a81d155",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 7145.653932345704,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 7.61371097562111,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 6384.419225346942,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.0015704667007462442,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 351.9397193368782,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 28.67067569851611,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0023795252967078843,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00010168795072992924,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 32.11792947912017,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 165053.9053912651,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, electric bicycle | maintenance, electric bicycle | Cutoff, U",
+      "process_id": "14ed748e-2354-3243-bc80-4957bfb546b0",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 121.48222358088077,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.11974343579460953,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 93.01506498802433,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 5.8132755170418405e-05,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 6.01408657977127,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.6316487654343512,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 6.646801215600195e-05,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 2.541557136102989e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 0.5616282689239336,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 6141.858132880001,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, lorry 16 metric ton | maintenance, lorry 16 metric ton | Cutoff, U",
+      "process_id": "17885274-ba18-38f6-a235-316a5cabb166",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 25290.921871847226,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 16.326594054542547,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 16323.669148251634,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00846322508415365,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 942.0151030148438,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 88.99322689905716,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0077543400046989645,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00025811610323143986,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 66.66979371590075,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 383308.2825769444,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 16 metric ton | maintenance, lorry 16 metric ton | Cutoff, U",
+      "process_id": "5a968378-2879-33da-afb1-3886c42fcf9b",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 25290.921871843413,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 16.32659405454197,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 16323.66914824992,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.008463225084152922,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 942.0151030147275,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 88.99322689905189,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.007754340004698714,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00025811610323134526,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 66.66979371590266,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 383308.2825769128,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, passenger car | passenger car maintenance | Cutoff, U",
+      "process_id": "47b432e9-01e3-3041-98c4-91ddef1a8f60",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 2446.783595705716,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 1.2708681022761952,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 1374.512759703442,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00045442020397471714,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 61.165910716412746,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 5.261817349819647,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0011179522632546084,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 9.322512754415403e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 8.306708401924093,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 72209.13569484756,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, motor scooter | maintenance, motor scooter | Cutoff, U",
+      "process_id": "8b2a2d5c-0074-360f-bd60-b292ca97abe1",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 541.0202446896527,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.17407006918858817,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 262.23207627932305,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.00012702560672182256,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 9.69980298623741,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.789806256869674,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.00023470973349793212,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 5.505137656920066e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 1.0365201507457673,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 10754.967423618713,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, bus | maintenance, bus | Cutoff, U",
+      "process_id": "22dbac1b-2f17-360e-8025-97d700dc3f59",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 14729.148122477447,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 4.665391381399675,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 7749.109461152365,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.003504610115324847,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 315.437242752726,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 31.710329962965623,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.006482453631457519,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.00023456853983774113,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 38.67071444061874,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 916779.921365333,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 40 metric ton | maintenance, lorry 40 metric ton | Cutoff, U",
+      "process_id": "817a9e6f-fb23-37bc-9d41-f2175580c139",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 62360.78818287675,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 26.03073041529507,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 28252.56108200483,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.017812105415126775,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 1521.1869880250197,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 134.72170580120465,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.011370310278804106,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0006176324041100335,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 125.12348759956983,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 707974.3028368087,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, electric bicycle | maintenance, electric bicycle | Cutoff, U",
+      "process_id": "e091e69a-ec72-3ac9-9d21-a526b5e7c410",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 121.42968189187056,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.11609253437026726,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 94.15852703905881,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 5.807171713849454e-05,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 5.957795337839288,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.6272796907709219,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 6.841429895012949e-05,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 2.539213716305549e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 0.5269109810956554,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 6209.958472729652,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, lorry 28 metric ton | maintenance, lorry 28 metric ton | Cutoff, U",
+      "process_id": "8d4fb1bb-78c0-3fb8-a20c-03c7f72f4d01",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "RoW",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 37014.79208028155,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 19.735467961710697,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 20461.00426353349,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.014031845141936703,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 1139.0001602578257,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 104.22469145800878,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.009035412953118549,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 0.0003722163379169656,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 86.98642280019301,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 539404.4565003295,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "maintenance, motor scooter | maintenance, motor scooter | Cutoff, U",
+      "process_id": "9d757c72-b7d4-31cc-9a9a-ac35647f2d97",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/454:Sale, maintenance and repair of motorcycles and related parts and accessories/4540:Sale, maintenance and repair of motorcycles and related parts and accessori",
+      "process_location": "CH",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 540.350441305504,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 0.16618909202002732,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 263.68162815024044,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.0001265304325308019,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 9.541435269374055,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 0.7790201564787138,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0003028675523852483,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 5.490900775583161e-06,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 0.9682936785623572,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 12822.300406583976,
+              "Unit": "CTUe"
+          }
+      }
+  },
+  {
+      "process_name": "market for maintenance, passenger car, electric, without battery | maintenance, passenger car, electric, without battery | Cutoff, U",
+      "process_id": "609ef1df-2077-3437-8b34-873efc58e61e",
+      "process_category": "G:Wholesale and retail trade; repair of motor vehicles and motorcycles/45:Wholesale and retail trade and repair of motor vehicles and motorcycles/452:Maintenance and repair of motor vehicles/4520:Maintenance and repair of motor vehicles",
+      "process_location": "GLO",
+      "impact_results": {
+          "Fossil fuel depletion": {
+              "Amount": 2048.5930976720115,
+              "Unit": "MJ surplus"
+          },
+          "Respiratory effects": {
+              "Amount": 1.2606624851352697,
+              "Unit": "kg PM2.5 eq"
+          },
+          "Global warming": {
+              "Amount": 1030.2041426782594,
+              "Unit": "kg CO2 eq"
+          },
+          "Carcinogenics": {
+              "Amount": 0.0003881119775496748,
+              "Unit": "CTUh"
+          },
+          "Smog": {
+              "Amount": 393.88343359696114,
+              "Unit": "kg O3 eq"
+          },
+          "Acidification": {
+              "Amount": 4.145581793309449,
+              "Unit": "kg SO2 eq"
+          },
+          "Non carcinogenics": {
+              "Amount": 0.0003965649494828269,
+              "Unit": "CTUh"
+          },
+          "Ozone depletion": {
+              "Amount": 2.171402672833585e-05,
+              "Unit": "kg CFC-11 eq"
+          },
+          "Eutrophication": {
+              "Amount": 9.216746688780031,
+              "Unit": "kg N eq"
+          },
+          "Ecotoxicity": {
+              "Amount": 24251.606180254406,
+              "Unit": "CTUe"
+          }
+      }
+  }
+]
