@@ -53,6 +53,15 @@ def load_css(file_name):
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
+def checkForLocation(query):
+    instruction = "Does this query specify a single location? Answer \"yes\" or \"no\". \nQuery:"
+    query_text = instruction + query
+    response = model_4o(query_text, False)["choices"][0]["message"]["content"]
+    if "yes" in response.lower():
+        return True
+    else:
+        return False
+
 
 # Load external CSS
 load_css("frontend/pages/styles.css")
@@ -115,35 +124,59 @@ if st.session_state.role != "Select an option":
             response_placeholder = st.empty()
             spinner_placeholder = st.markdown("<div class='loader'></div> Generating...", unsafe_allow_html=True)
 
-            # Call function with memory support
+            
 
             #Check if the prompt is an environmental query.
-            instruction = "Does the following prompt ask a technical question about environmental impact data? (Answer with \"yes\" or \"no\".) "
+            instruction = "Based on the following input, classify the user's intent as one of the following categories: \n\"query\"" \
+                "if the user is asking a technical question about environmental impact data. \n\"validate\" if the user is requesting" \
+                "validation of environmental impact data they have provided.\n\"neither\" if the input does not fit into either category." \
+                "Provide only the category name as the answer. Provide the correct answer for each location.\nInput:" 
             classification = model_4o(instruction + prompt, False)
             classification_text = classification["choices"][0]["message"]["content"].strip().lower()
-
             thinkTrej = thinkTrej + "LLM input: " + instruction + prompt + "<br>" + "LLM response: " + classification_text
 
-            #If it is, route to RAG.
-            if classification_text.startswith("yes"):
-                #Return the process name and location for each possible answer.
-                query_text = prompt + " Also return the process name and process location of the answer."
+            #If it is, route the query to RAG.
+            if classification_text.startswith("query"):
+                
+                #Return the process name of the answer.
+                instruction =  "Provide just the name of the process relevant to my query. \nQuery:"
+                query_text = instruction + prompt
                 thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
                 query = {"query": query_text}
                 response = requests.post(url, json=query)
-                str = response.json()["response"]
-                thinkTrej = thinkTrej + "<br>RAG output:" + str
-                classification = model_4o("Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)", False)
-                thinkTrej = thinkTrej + "<br>LLM input: " + "Does the location and process name in this question: " + prompt + " Fit with the location and processs name in this answer: " + str + " (Answer with \"yes\" or \"no\".)"
-                classification_text = classification["choices"][0]["message"]["content"].strip().lower()
-                thinkTrej = thinkTrej + "<br>LLM output: " + classification_text
-                if classification_text.startswith("no"):
-                    str = "Sorry! We do not have that data."
-                elif st.session_state.role == "Researcher":
-                    str = model_4o("Respond using the information in the following answer: " + str + " Keep the response under two sentences and data focused.", False)["choices"][0]["message"]["content"]
+                processName = response.json()["response"]
+                thinkTrej = thinkTrej + "<br>RAG output:" + processName
+
+                #Find all of the locations.
+                instruction =  "Provide all the locations relvent to this process name. List them in the format \"Location1,Location2,etc.\" Process Name: "
+                query_text = instruction + processName
+                thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
+                query = {"query": query_text}
+                response = requests.post(url, json=query)
+                locations = response.json()["response"]
+                thinkTrej = thinkTrej + "<br>RAG output:" + locations
+
+                locations = locations.split(",")
+                
+                str = ""
+                for location in locations:
+                    query_text = "Answer this query: " + prompt + " Using the location: " + location + " and the process name: " + processName + ".\n"
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
+                    query = {"query": query_text}
+                    response = requests.post(url, json=query)
+                    answer = response.json()["response"]
+                    thinkTrej = thinkTrej + "<br>RAG output:" + answer
+                    str = str + answer + "\n"
+                
+                if st.session_state.role == "Researcher":
+                    researcher_instruction = "You are answering a question about environmental impact using real data. \nUse the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
+                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience."
+                    str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences and data focused."
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
                 elif st.session_state.role == "Policy Maker":
+                    policy_instruction = "You are answering a question about environmental impact using real data. \nUse the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
+                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a policy maker audience."
                     str = model_4o("Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact.", False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact."
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
@@ -152,10 +185,30 @@ if st.session_state.role != "Select an option":
                 
                 recordOutput(response)
                 
+            #If it is a validation question, route to RAG
+            elif classification_text.startswith("validate"):
+                thinkTrej = thinkTrej + "<br>LLM input: " + "Does this query specify a single location? Answer \"yes\" or \"no\". \nQuery:"
+                hasLocation = checkForLocation(prompt)
+                thinkTrej = thinkTrej + "<br>LLM output: " + str(hasLocation)
+                if hasLocation:
+                    query_text = "Answer this query: " + prompt + ".\nIf the data is incorrect, provide the correct data."
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text
+                    query = {"query": query_text}
+                    response = requests.post(url, json=query)
+                    str = response.json()["response"]
+                    
+                    thinkTrej = thinkTrej + "<br>RAG output:" + str
+                
+                else:
 
+                    str = "Please provide a single location to validate the data."
+                    
+                response = f"Eco(RAG): {str + thinkTrej}"
+                recordOutput(response)
                 
             #If not, route to GPT.
             else:
+
                 thinkTrej = thinkTrej + "<br>LLM input: " + prompt
                 answer = model_4o(prompt, True)
                 response = f"Eco(GPT): {answer['choices'][0]['message']['content'] + thinkTrej}"
