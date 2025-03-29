@@ -134,7 +134,6 @@ if st.session_state.role != "Select an option":
             classification = model_4o(instruction + prompt, False)
             classification_text = classification["choices"][0]["message"]["content"].strip().lower()
             thinkTrej = thinkTrej + "LLM input: " + instruction + prompt + "<br>" + "LLM response: " + classification_text
-
             #If it is, route the query to RAG.
             if classification_text.startswith("query"):
                 
@@ -148,17 +147,20 @@ if st.session_state.role != "Select an option":
                 thinkTrej = thinkTrej + "<br>RAG output:" + processName
 
                 #Find all of the locations.
-                instruction =  "Provide all the locations relvent to this process name. List them in the format \"Location1,Location2,etc.\" Process Name: "
+                instruction =  "Provide all the locations relvent to this process name." \
+                     + "List them in the format \"Location1,Location2,etc.\" Process Name: "
                 query_text = instruction + processName
                 thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
                 query = {"query": query_text}
                 response = requests.post(url, json=query)
                 locations = response.json()["response"]
                 thinkTrej = thinkTrej + "<br>RAG output:" + locations
-
+                
                 locations = locations.split(",")
                 
                 str = ""
+
+
                 for location in locations:
                     query_text = "Answer this query: " + prompt + " Using the location: " + location + " and the process name: " + processName + ".\n"
                     thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
@@ -172,13 +174,16 @@ if st.session_state.role != "Select an option":
                     researcher_instruction = "You are answering a question about environmental impact using real data. \nUse the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
                         + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience."
                     str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences and data focused."
+                    thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
+
                 elif st.session_state.role == "Policy Maker":
-                    policy_instruction = "You are answering a question about environmental impact using real data. \nUse the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
-                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a policy maker audience."
-                    str = model_4o("Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact.", False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + "Respond using the information in the following answer: " + str + " Keep the response under two sentences. Give an example value to add perspective about the severity of enviornmental impact."
+                    policy_instruction = "You are answering a question about environmental impact using real data. \n"\
+                            + "Use the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
+                            + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions." \
+                            + " Craft your answer to a policy maker audience."
+                    str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
+                    thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
                
                 response = f"Eco(RAG): {str + thinkTrej}"
