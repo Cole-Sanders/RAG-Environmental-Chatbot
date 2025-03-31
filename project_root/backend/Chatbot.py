@@ -54,7 +54,7 @@ def load_css(file_name):
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 def checkForLocation(query):
-    instruction = "Does this query specify a single location? Answer \"yes\" or \"no\". \nQuery:"
+    instruction = "Does this query specify a single region? Answer \"yes\" or \"no\". \nQuery:"
     query_text = instruction + query
     response = model_4o(query_text, False)["choices"][0]["message"]["content"]
     if "yes" in response.lower():
@@ -136,40 +136,51 @@ if st.session_state.role != "Select an option":
             thinkTrej = thinkTrej + "LLM input: " + instruction + prompt + "<br>" + "LLM response: " + classification_text
             #If it is, route the query to RAG.
             if classification_text.startswith("query"):
-                
-                #Return the process name of the answer.
-                instruction =  "Provide just the name of the process relevant to my query. \nQuery:"
-                query_text = instruction + prompt
-                thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
-                query = {"query": query_text}
-                response = requests.post(url, json=query)
-                processName = response.json()["response"]
-                thinkTrej = thinkTrej + "<br>RAG output:" + processName
 
-                #Find all of the locations.
-                instruction =  "Provide all the locations relvent to this process name." \
-                     + "List them in the format \"Location1,Location2,etc.\" Process Name: "
-                query_text = instruction + processName
-                thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
-                query = {"query": query_text}
-                response = requests.post(url, json=query)
-                locations = response.json()["response"]
-                thinkTrej = thinkTrej + "<br>RAG output:" + locations
-                
-                locations = locations.split(",")
-                
-                str = ""
-
-
-                for location in locations:
-                    query_text = "Answer this query: " + prompt + " Using the location: " + location + " and the process name: " + processName + ".\n"
+                #Check if the query specifies a single location.
+                if (checkForLocation(prompt)):
+                    query_text = prompt + ". Also return the process name."
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text
+                    query = {"query": query_text}
+                    response = requests.post(url, json=query)
+                    str = response.json()["response"]
+                    thinkTrej = thinkTrej + "<br>RAG output:" + str
+                    
+                #If it does not, find the answers for every location.
+                else:
+                    #Return the process name of the answer.
+                    instruction =  "Provide just the name of the process relevant to my query. \nQuery:"
+                    query_text = instruction + prompt
                     thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
                     query = {"query": query_text}
                     response = requests.post(url, json=query)
-                    answer = response.json()["response"]
-                    thinkTrej = thinkTrej + "<br>RAG output:" + answer
-                    str = str + answer + "\n"
-                
+                    processName = response.json()["response"]
+                    thinkTrej = thinkTrej + "<br>RAG output:" + processName
+
+                    #Find all of the locations.
+                    instruction =  "Provide all the locations relvent to this process name." \
+                        + "List them in the format \"Location1,Location2,etc.\" Process Name: "
+                    query_text = instruction + processName
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
+                    query = {"query": query_text}
+                    response = requests.post(url, json=query)
+                    locations = response.json()["response"]
+                    thinkTrej = thinkTrej + "<br>RAG output:" + locations
+                    
+                    locations = locations.split(",")
+                    
+                    str = ""
+
+
+                    for location in locations:
+                        query_text = "Answer this query: " + prompt + " Using the location: " + location + " and the process name: " + processName + ".\n"
+                        thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
+                        query = {"query": query_text}
+                        response = requests.post(url, json=query)
+                        answer = response.json()["response"]
+                        thinkTrej = thinkTrej + "<br>RAG output:" + answer
+                        str = str + answer + "\n"
+                    
                 if st.session_state.role == "Researcher":
                     researcher_instruction = "You are answering a question about environmental impact using real data. \nUse the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
                         + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience."
@@ -185,9 +196,9 @@ if st.session_state.role != "Select an option":
                     str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
-               
-                response = f"Eco(RAG): {str + thinkTrej}"
                 
+                response = f"Eco(RAG): {str + thinkTrej}"
+                    
                 recordOutput(response)
                 
             #If it is a validation question, route to RAG
