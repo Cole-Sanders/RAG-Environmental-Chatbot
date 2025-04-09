@@ -4,6 +4,44 @@ import requests
 from dotenv import load_dotenv
 from litellm import completion
 
+import re
+import io
+import base64
+import matplotlib.pyplot as plt
+
+# Helper to extract and render LLM-generated Python matplotlib code as an image
+def generate_visualization_from_code(code_text):
+    """
+    Extracts Python code from a markdown code block, executes it,
+    and returns a base64-encoded PNG image string of the resulting matplotlib plot.
+    """
+    # Extract the code block
+    match = re.search(r"```python(.*?)```", code_text, re.DOTALL)
+    code_snippet = match.group(1).strip() if match else None
+
+    if not code_snippet:
+        return None  # No code found
+
+    try:
+        # Setup for safe execution
+        exec_globals = {"plt": plt}
+        exec(code_snippet, exec_globals)
+
+        # Save figure to buffer
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png")
+        plt.close()
+        buf.seek(0)
+
+        # Encode image to base64
+        return base64.b64encode(buf.read()).decode("utf-8")
+
+    except Exception as e:
+        print("Visualization generation failed:", e)
+        return None
+
+
+
 #URL to FastAPI server
 url = "http://localhost:8000/query"
 
@@ -156,6 +194,38 @@ if st.session_state.role != "Select an option":
                     )["choices"][0]["message"]["content"]
                     thinkTrej += f"<br><br><b>LLM input:</b> Respond using the information in the following answer: {str_response} Keep the response under two sentences. Give an example value to add perspective about the severity of environmental impact."
                     thinkTrej += f"<br><br><b>LLM output:</b> {str_response}"
+
+
+                viz_check_prompt = (
+                "Given the following answer, determine whether a chart/visualization would meaningfully improve user understanding. "
+                "Only respond with 'yes' if the answer contains at least 2 or more values or comparisons that could be shown visually. "
+                "Respond with 'no' if the answer is just a single fact, statistic, or statement.\n\n"
+                f"Answer: {str_response}"
+)
+                viz_check = model_4o(viz_check_prompt, False)
+                viz_check_text = viz_check["choices"][0]["message"]["content"].strip().lower()
+
+                if viz_check_text.startswith("yes"):
+                    # Ask LLM to generate visualization code
+                    viz_prompt = (
+                    f"Given the following question and answer, return Python code using ONLY matplotlib "
+                    f"to generate a simple visualization to support the answer. "
+                    f"Use plt.subplots(), and ensure the chart includes a title and axis labels. "
+                    f"Return ONLY the code in a Python code block, and DO NOT include explanations or markdown. "
+                    f"And please double check the code to make sure there are no erros. This code is going to be ran automatically. \n\n"
+                    f"Question: {prompt}\nAnswer: {str_response}"
+)
+                    viz_response = model_4o(viz_prompt, False)
+                    code_text = viz_response["choices"][0]["message"]["content"]
+
+                    viz_img = generate_visualization_from_code(code_text)
+                    # Add image to response
+                    if viz_img:
+                        str_response += f'<br><br><b>Visualization:</b><br><img src="data:image/png;base64,{viz_img}" width="600"/>'
+                    else:
+                        str_response += f'<br><br><b>Visualization:</b> <i>(Could not generate visualization)</i>'
+                else:
+                    str_response += f'<br><br><b>Visualization:</b> <i>(Not needed for this answer)</i>'
                
                 response = f"<b>Eco(RAG):</b> {str_response + thinkTrej}"
                 recordOutput(response)
@@ -166,6 +236,8 @@ if st.session_state.role != "Select an option":
                 answer = model_4o(prompt, True)
                 str_response = answer['choices'][0]['message']['content']
                 thinkTrej += f"<br><br><b>LLM output:</b> {str_response}"
+
+
                 response = f"<b>Eco(GPT):</b> {str_response + thinkTrej}"
                 recordOutput(response)
    
