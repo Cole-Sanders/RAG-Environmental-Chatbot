@@ -198,6 +198,7 @@ if st.session_state.role != "Select an option":
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
                 
                 response = f"Eco(RAG): {str + thinkTrej}"
+                #response = f"Eco(RAG): {str}"
                     
                 recordOutput(response)
                 
@@ -219,7 +220,7 @@ if st.session_state.role != "Select an option":
 
                     str = "Please provide a single location to validate the data."
                     
-                response = f"Eco(RAG): {str + thinkTrej}"
+                response = f"Eco(RAG): {str}"
                 recordOutput(response)
                 
             #If not, route to GPT.
