@@ -12,14 +12,6 @@ class QueryRequest(BaseModel):
     query: str
 
 # API endpoint to query the vectorized index
-@app.post("/dataquery")
-async def query_index(request: QueryRequest):
-    response = data_query_engine.query(request.query)
-    if len(response.source_nodes) == 0:
-        return {"response": ""}
-    elif len(response.source_nodes) >= 1:
-        return {"response": str(response.source_nodes[0].node.text)}
-
 @app.post("/namequery")
 async def query_index(request: QueryRequest):
     response = name_query_engine.query(request.query)
