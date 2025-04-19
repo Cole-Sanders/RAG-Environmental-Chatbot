@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from litellm import completion
 
 #URLs to FastAPI server
-data_url = "http://localhost:8000/dataquery"
 name_url = "http://localhost:8000/namequery"
 location_url = "http://localhost:8000/locationquery"
 
