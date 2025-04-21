@@ -10,21 +10,23 @@ from llama_index.core.agent import ReActAgent
 
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
-from llama_index.llms.litellm import LiteLLM
+from llama_index.llms.openai import OpenAI
 
 # changing the global default
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002",
                                        api_key=os.getenv("API_KEY"),
                                        api_base="http://18.216.253.243:4000/")
-Settings.llm = LiteLLM(model="gpt-3.5-turbo",
-                                       api_key=os.getenv("API_KEY"),
-                                       api_base="http://18.216.253.243:4000/")
+Settings.llm = OpenAI(
+    model="gpt-3.5-turbo",
+    api_key=os.getenv("API_KEY"),
+    api_base="http://18.216.253.243:4000/"
+)
 
 # Initialize JSONReader
 reader = JSONReader()
 
 # Load data from JSON file
-documents = reader.load_data(input_file="project_root/backend/data/Data.json", extra_info={})
+documents = reader.load_data(input_file="project_root/backend/Data.json", extra_info={})
 
 # Create or Load the Index
 index_path = "project_root/backend/storage"
