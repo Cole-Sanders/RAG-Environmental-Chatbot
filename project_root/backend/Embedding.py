@@ -1,13 +1,8 @@
 from dotenv import load_dotenv
-
 load_dotenv()
-from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings, StorageContext, load_index_from_storage
-from llama_index.llms.openai import OpenAI
-from llama_index.core.readers.json import JSONReader
+from llama_index.core import Document
+from llama_index.core import VectorStoreIndex, Settings, StorageContext, load_index_from_storage
 import os
-from llama_index.core.tools import QueryEngineTool
-from llama_index.core.agent import ReActAgent
-
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 from llama_index.llms.litellm import LiteLLM
@@ -20,25 +15,27 @@ Settings.llm = LiteLLM(model="gpt-3.5-turbo",
                                        api_key=os.getenv("API_KEY"),
                                        api_base="http://18.216.253.243:4000/")
 
-# Initialize JSONReader
-reader = JSONReader()
 
-# Load data from JSON file
-documents = reader.load_data(input_file="project_root/backend/Data.json", extra_info={})
+name_documents = []
+with open("project_root/backend/NameData.txt", "r") as f:
+    for line in f:
+        line = line.strip()
+        if line:
+            doc = Document(text=line)
+            name_documents.append(doc)
 
-# Create or Load the Index
-index_path = "project_root/backend/storage"
 
-if os.path.exists(index_path):  # Load existing index if present
-    storage_context = StorageContext.from_defaults(persist_dir=index_path)
-    index = load_index_from_storage(storage_context)
+
+name_index_path = "project_root/backend/nameStorage"
+
+
+if os.path.exists(name_index_path):  # Load existing index if present
+    storage_context = StorageContext.from_defaults(persist_dir=name_index_path)
+    name_index = load_index_from_storage(storage_context)
 else:  # Create a new index and store it
-    index = VectorStoreIndex.from_documents(documents, embed_model=Settings.embed_model)
-    index.storage_context.persist(persist_dir=index_path)
+    name_index = VectorStoreIndex.from_documents(name_documents, embed_model=Settings.embed_model)
+    name_index.storage_context.persist(persist_dir=name_index_path)
 
-query_engine = index.as_query_engine()
+name_query_engine = name_index.as_query_engine(return_source=True, similarity_top_k=10)
 
-response = query_engine.query(
-    "What was acidification of electricty?"
-)
-print(response)
+

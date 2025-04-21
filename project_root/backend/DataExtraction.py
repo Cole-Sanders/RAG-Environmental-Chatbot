@@ -1,34 +1,4 @@
-"""
-import json
 
-# Load JSON from file
-with open("project_root/backend/process_data/processes/00ca40a7-f952-3e81-aca8-97a3d71a1ffc.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-# Extract the @id
-process_id = data["@id"]
-
-# Extract the middle part between the two pipe symbols
-name_parts = data["name"].split("|")
-middle_name = name_parts[1].strip() if len(name_parts) >= 3 else None
-
-# Find the specific exchange
-target_exchange = next(
-    (ex for ex in data["exchanges"] if ex["flow"]["name"] == middle_name),
-    None
-)
-
-# Extract amount and unit
-amount = target_exchange["amount"] if target_exchange else None
-unit = target_exchange["unit"]["name"] if target_exchange else None
-
-# Output results
-print("Process ID:", process_id)
-print("Middle name:", middle_name)
-print("Amount:", amount)
-print("Unit:", unit)
-
-"""
 
 import json
 import os
