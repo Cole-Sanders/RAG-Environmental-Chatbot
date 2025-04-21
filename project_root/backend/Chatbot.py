@@ -184,7 +184,7 @@ if st.session_state.role != "Select an option":
 
                     # Send all 10 processes to the LLM and ask it to find the best match for the query based on name alone.
                     instruction = "Given this query, return just the verbatium text of the process that best matches the query, minus its location. \nQuery:" + prompt + "\n" + str
-                    str = model_4o(instruction, False)["choices"][0]["message"]["content"]
+                    processName = model_4o(instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
 
@@ -201,7 +201,7 @@ if st.session_state.role != "Select an option":
 
                     # For each location, pull the process data and add it to the response.
                     for location in locations:
-                        answer = pullProcessData(str, "Location: " + location + ".")
+                        answer = pullProcessData(processName, "Location: " + location + ".")
                         thinkTrej = thinkTrej + "<br>Matched Process Data:" + answer
                         str = str + answer + "\n"
                 
