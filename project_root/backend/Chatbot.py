@@ -208,7 +208,7 @@ if st.session_state.role != "Select an option":
                 # Send the process data to the LLM and ask it to answer the user query as a researcher.
                 if st.session_state.role == "Researcher":
                     researcher_instruction = "You are answering a question about environmental impact using real data. Use this process data to answer the user query. \nRetrieved Data: " \
-                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience."
+                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience. Do not show equaitons."
                     str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
@@ -218,7 +218,7 @@ if st.session_state.role != "Select an option":
                     policy_instruction = "You are answering a question about environmental impact using real data. \n"\
                             + "Use the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
                             + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions." \
-                            + " Craft your answer to a policy maker audience."
+                            + " Craft your answer to a policy maker audience. Do not show equations."
                     str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str

@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-from Embedding import data_query_engine  # Import the query engine from index_builder
 from Embedding import name_query_engine  # Import the query engine from index_builder
 
 # Initialize FastAPI
