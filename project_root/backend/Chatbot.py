@@ -4,6 +4,42 @@ import requests
 from dotenv import load_dotenv
 from litellm import completion
 
+import re
+import io
+import base64
+import matplotlib.pyplot as plt
+
+# Helper to extract and render LLM-generated Python matplotlib code as an image
+def generate_visualization_from_code(code_text):
+    """
+    Extracts Python code from a markdown code block, executes it,
+    and returns a base64-encoded PNG image string of the resulting matplotlib plot.
+    """
+    # Extract the code block
+    match = re.search(r"```python(.*?)```", code_text, re.DOTALL)
+    code_snippet = match.group(1).strip() if match else None
+
+    if not code_snippet:
+        return None  # No code found
+
+    try:
+        # Setup for safe execution
+        exec_globals = {"plt": plt}
+        exec(code_snippet, exec_globals)
+
+        # Save figure to buffer
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png")
+        plt.close()
+        buf.seek(0)
+
+        # Encode image to base64
+        return base64.b64encode(buf.read()).decode("utf-8")
+
+    except Exception as e:
+        print("Visualization generation failed:", e)
+        return None
+
 #URLs to FastAPI server
 name_url = "http://localhost:8000/namequery"
 location_url = "http://localhost:8000/locationquery"
@@ -171,9 +207,11 @@ if st.session_state.role != "Select an option":
                     str = pullProcessData(nameAndLoc[0], nameAndLoc[1])
                     thinkTrej = thinkTrej + "<br>Matched Process Data:" + str
                     
-                    
+                
+
                 #If it does not specify a location, find the answers for every location in the dataset.
                 else:
+                    viz_possible = True
                     # Return the top 10 processes that match the query by name.
                     query_text = prompt
                     query = {"query": query_text}
@@ -204,11 +242,14 @@ if st.session_state.role != "Select an option":
                         answer = pullProcessData(processName, "Location: " + location + ".")
                         thinkTrej = thinkTrej + "<br>Matched Process Data:" + answer
                         str = str + answer + "\n"
+                    
+                     
                 
                 # Send the process data to the LLM and ask it to answer the user query as a researcher.
                 if st.session_state.role == "Researcher":
                     researcher_instruction = "You are answering a question about environmental impact using real data. Use this process data to answer the user query. \nRetrieved Data: " \
-                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience. Do not show equaitons."
+                        + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience. Do not show equaitons." \
+                        + " Show the process name and location in your answer."
                     str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
@@ -218,13 +259,34 @@ if st.session_state.role != "Select an option":
                     policy_instruction = "You are answering a question about environmental impact using real data. \n"\
                             + "Use the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
                             + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions." \
-                            + " Craft your answer to a policy maker audience. Do not show equations."
+                            + " Craft your answer to a policy maker audience. Do not show equations." \
+                            + " Show the process name and location in your answer."
                     str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
                     thinkTrej = thinkTrej + "<br>LLM output: " + str
                 
-                response = f"Eco(RAG): {str + thinkTrej}"
-                #response = f"Eco(RAG): {str}"
+
+                if viz_possible:
+                    # Ask LLM to generate visualization code
+                    viz_prompt = (
+                    f"Given the following question and answer, return Python code using ONLY matplotlib "
+                    f"to generate a simple visualization to support the answer. "
+                    f"Use plt.subplots(), and ensure the chart includes a title and axis labels. "
+                    f"Return ONLY the code in a Python code block, and DO NOT include explanations or markdown. "
+                    f"And please double check the code to make sure there are no erros. This code is going to be ran automatically. \n\n"
+                    f"Question: {prompt}\nAnswer: {str}"
+)
+                    viz_response = model_4o(viz_prompt, False)
+                    code_text = viz_response["choices"][0]["message"]["content"]
+
+                    viz_img = generate_visualization_from_code(code_text)
+                    # Add image to response
+                    if viz_img:
+                        str += f'<br><br><b>Visualization:</b><br><img src="data:image/png;base64,{viz_img}" width="600"/>'
+
+
+                #response = f"Eco(RAG): {str + thinkTrej}"
+                response = f"Eco(RAG): {str}"
                     
                 recordOutput(response)
                 
@@ -260,7 +322,8 @@ if st.session_state.role != "Select an option":
                     # Send the process data to the LLM and ask it to validate the user data for a researcher audience.
                     if st.session_state.role == "Researcher":
                         researcher_instruction = "You are validating user data about environmental impact using real data. Use this process data to check the accuracy of the user data. \nRetrieved Data: " \
-                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a researcher audience."
+                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a researcher audience. Do not use Equations." \
+                            + " List the process name and location in after the answer."
                         str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
                         thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
                         thinkTrej = thinkTrej + "<br>LLM output: " + str
@@ -268,7 +331,8 @@ if st.session_state.role != "Select an option":
                     # Send the process data to the LLM and ask it to validate the user data for a policy maker audience.
                     elif st.session_state.role == "Policy Maker":
                         policy_instruction = "You are validating user data about environmental impact using real data. Use this process data to check the accuracy of the user data. \nRetrieved Data: " \
-                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a policy maker audience."
+                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a policy maker audience. Do not use Equations." \
+                            + " List the process name and location in after the answer."
                         str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                         thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
                         thinkTrej = thinkTrej + "<br>LLM output: " + str
