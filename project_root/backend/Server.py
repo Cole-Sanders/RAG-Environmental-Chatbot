@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-from Embedding import name_query_engine  # Import the query engine from index_builder
+from Embedding import name_query_engine  
 
 # Initialize FastAPI
 app = FastAPI()
@@ -12,7 +12,7 @@ class QueryRequest(BaseModel):
 
 # API endpoint to query the vectorized index
 @app.post("/namequery")
-async def query_index(request: QueryRequest):
+async def process_search(request: QueryRequest):
     response = name_query_engine.query(request.query)
     result = "Processes:\n"
     for node in response.source_nodes:
@@ -20,7 +20,7 @@ async def query_index(request: QueryRequest):
     return {"response": result}
 
 @app.post("/locationquery")
-async def query_index(request: QueryRequest):
+async def location_search(request: QueryRequest):
     response = name_query_engine.query(request.query)
     return {"response": str(response)}
 

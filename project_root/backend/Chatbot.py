@@ -9,6 +9,18 @@ import io
 import base64
 import matplotlib.pyplot as plt
 
+
+
+#URLs to FastAPI server
+name_url = "http://localhost:8000/namequery"
+location_url = "http://localhost:8000/locationquery"
+
+# Set page title and favicon
+st.set_page_config(page_title="EcoValid", page_icon="🌿")  
+
+# Load environment variables from .env file
+load_dotenv()
+
 # Helper to extract and render LLM-generated Python matplotlib code as an image
 def generate_visualization_from_code(code_text):
     """
@@ -39,16 +51,6 @@ def generate_visualization_from_code(code_text):
     except Exception as e:
         print("Visualization generation failed:", e)
         return None
-
-#URLs to FastAPI server
-name_url = "http://localhost:8000/namequery"
-location_url = "http://localhost:8000/locationquery"
-
-# Set page title and favicon
-st.set_page_config(page_title="EcoValid", page_icon="🌿")  
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Function to access the azure api key and get a response from the model
 def model_4o(enquire, memory):
@@ -110,6 +112,20 @@ def pullProcessData(processName, processLocation):
             if (processName in dataNode) and (processLocation == location):
                 return dataNode
     return ""
+
+def getProcesses(prompt):
+    # Return the top 10 processes that match the query by name.
+    query = {"query": query_text}
+    response = requests.post(name_url, json=query)
+    str = response.json()["response"]
+    return str
+
+def getLocations(prompt):
+    # Return the locations for each instance of the process.
+    query = {"query": query_text}
+    response = requests.post(location_url, json=query)
+    str = response.json()["response"]
+    return str
 
 
 # Load external CSS
@@ -186,21 +202,19 @@ if st.session_state.role != "Select an option":
             #If it is, route the query to RAG.
             if classification_text.startswith("query"):
 
+                viz_possible = False
+
                 #Check if the query specifies a single location.
                 if (checkForLocation(prompt)):
                     # Return the top 10 processes that match the query by name and location.
                     query_text = prompt
-                    query = {"query": query_text}
-                    response = requests.post(name_url, json=query)
-                    str = response.json()["response"]
-                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text
-                    thinkTrej = thinkTrej + "<br>RAG output: " + str
+                    getProcesses(query_text)
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text + "<br>RAG output: " + str
 
                     # Send all 10 processes to the LLM and ask it to find the best match for the query based on name and location.
                     instruction = "Given this query, return just the verbatium text (process name and location) of the process that best matches the query. \nQuery:" + prompt + "\n" + str
                     str = model_4o(instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction
-                    thinkTrej = thinkTrej + "<br>LLM output: " + str
+                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction + "<br>LLM output: " + str
                     nameAndLoc = str.split(".")
 
                     # Return the process data for the best match.
@@ -214,27 +228,20 @@ if st.session_state.role != "Select an option":
                     viz_possible = True
                     # Return the top 10 processes that match the query by name.
                     query_text = prompt
-                    query = {"query": query_text}
-                    response = requests.post(name_url, json=query)
-                    str = response.json()["response"]
-                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text
-                    thinkTrej = thinkTrej + "<br>RAG output: " + str
+                    str = getProcesses(query_text)
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text + "<br>RAG output: " + str
 
                     # Send all 10 processes to the LLM and ask it to find the best match for the query based on name alone.
                     instruction = "Given this query, return just the verbatium text of the process that best matches the query, minus its location. \nQuery:" + prompt + "\n" + str
                     processName = model_4o(instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction
-                    thinkTrej = thinkTrej + "<br>LLM output: " + str
+                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction + "<br>LLM output: " + str
 
                     #Find all of the locations for which there is data for the chosen process.
                     instruction =  "Provide all the locations for each instance of the following process." \
                         + "List them in the format \"Location1,Location2,etc.\" Process Name: "
                     query_text = instruction + str
-                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text 
-                    query = {"query": query_text}
-                    response = requests.post(location_url, json=query)
-                    locations = response.json()["response"]
-                    thinkTrej = thinkTrej + "<br>RAG output:" + locations
+                    locations = getLocations(query_text) 
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text + "<br>RAG output:" + locations
                     locations = locations.split(",")
 
                     # For each location, pull the process data and add it to the response.
@@ -251,8 +258,7 @@ if st.session_state.role != "Select an option":
                         + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions. Craft your answer to a researcher audience. Do not show equaitons." \
                         + " Show the process name and location in your answer."
                     str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
-                    thinkTrej = thinkTrej + "<br>LLM output: " + str
+                    thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction + "<br>LLM output: " + str
 
                 # Send the process data to the LLM and ask it to answer the user query as a policy maker.
                 elif st.session_state.role == "Policy Maker":
@@ -262,8 +268,7 @@ if st.session_state.role != "Select an option":
                             + " Craft your answer to a policy maker audience. Do not show equations." \
                             + " Show the process name and location in your answer."
                     str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
-                    thinkTrej = thinkTrej + "<br>LLM output: " + str
+                    thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction + "<br>LLM output: " + str
                 
 
                 if viz_possible:
@@ -294,25 +299,19 @@ if st.session_state.role != "Select an option":
             elif classification_text.startswith("validate"):
                 
                 #Check if the query specifies a single location.
-                thinkTrej = thinkTrej + "<br>LLM input: " + "Does this query specify a single location? Answer \"yes\" or \"no\". \nQuery:"
                 hasLocation = checkForLocation(prompt)
-                thinkTrej = thinkTrej + "<br>LLM output: " + str(hasLocation)
 
                 #If it does, continue. 
                 if hasLocation:
                     # Return the top 10 processes that match the query by name and location.
                     query_text = prompt
-                    query = {"query": query_text}
-                    response = requests.post(name_url, json=query)
-                    str = response.json()["response"]
-                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text
-                    thinkTrej = thinkTrej + "<br>RAG output: " + str
+                    str = getProcesses(query_text)
+                    thinkTrej = thinkTrej + "<br>RAG input: " + query_text + "<br>RAG output: " + str
 
                     # Send all 10 processes to the LLM and ask it to find the best match for the query based on name and location.
                     instruction = "Given this query, return just the verbatium text of the process (process name and location) that best matches the query. \nQuery:" + prompt + "\n" + str
                     str = model_4o(instruction, False)["choices"][0]["message"]["content"]
-                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction
-                    thinkTrej = thinkTrej + "<br>LLM output: " + str
+                    thinkTrej = thinkTrej + "<br>LLM input: " + instruction + "<br>LLM output: " + str
                     nameAndLoc = str.split(".")
 
                     # Return the process data for the best match.
@@ -325,8 +324,7 @@ if st.session_state.role != "Select an option":
                             + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a researcher audience. Do not use Equations." \
                             + " List the process name and location in after the answer."
                         str = model_4o(researcher_instruction, False)["choices"][0]["message"]["content"]
-                        thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction
-                        thinkTrej = thinkTrej + "<br>LLM output: " + str
+                        thinkTrej = thinkTrej + "<br>LLM input: " + researcher_instruction + "<br>LLM output: " + str
 
                     # Send the process data to the LLM and ask it to validate the user data for a policy maker audience.
                     elif st.session_state.role == "Policy Maker":
@@ -334,8 +332,7 @@ if st.session_state.role != "Select an option":
                             + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a policy maker audience. Do not use Equations." \
                             + " List the process name and location in after the answer."
                         str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
-                        thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction
-                        thinkTrej = thinkTrej + "<br>LLM output: " + str
+                        thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction + "<br>LLM output: " + str
                 
                 # If it does not specify a location, ask the user to specify one.
                 else:
@@ -346,11 +343,9 @@ if st.session_state.role != "Select an option":
                 
             #If not a enviornmental impact question, route to GPT.
             else:
-
-                thinkTrej = thinkTrej + "<br>LLM input: " + prompt
                 answer = model_4o(prompt, True)
-                response = f"Eco(GPT): {answer['choices'][0]['message']['content'] + thinkTrej}"
-                thinkTrej = thinkTrej + "<br>LLM output: " + answer['choices'][0]['message']['content']
+                response = f"Eco(GPT): {answer['choices'][0]['message']['content']}"
+                thinkTrej = thinkTrej + "<br>LLM input: " + prompt + "<br>LLM output: " + answer['choices'][0]['message']['content']
                 recordOutput(answer['choices'][0]['message']['content'])
    
             thinkTrej = ""
