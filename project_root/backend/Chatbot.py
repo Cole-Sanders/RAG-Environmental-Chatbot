@@ -208,7 +208,7 @@ if st.session_state.role != "Select an option":
                 if (checkForLocation(prompt)):
                     # Return the top 10 processes that match the query by name and location.
                     query_text = prompt
-                    getProcesses(query_text)
+                    str = getProcesses(query_text)
                     thinkTrej = thinkTrej + "<br>RAG input: " + query_text + "<br>RAG output: " + str
 
                     # Send all 10 processes to the LLM and ask it to find the best match for the query based on name and location.
@@ -265,7 +265,7 @@ if st.session_state.role != "Select an option":
                     policy_instruction = "You are answering a question about environmental impact using real data. \n"\
                             + "Use the retrieved information below to craft your response, ensuring accuracy.\nRetrieved Data: " \
                             + str + "User query:" + prompt + "\n" + "Answer the user query factually without making assumptions." \
-                            + " Craft your answer to a policy maker audience. Do not show equations." \
+                            + " Craft your answer to a policy maker audience and explain all technical terms and units. Do not show equations." \
                             + " Show the process name and location in your answer."
                     str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                     thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction + "<br>LLM output: " + str
@@ -290,8 +290,8 @@ if st.session_state.role != "Select an option":
                         str += f'<br><br><b>Visualization:</b><br><img src="data:image/png;base64,{viz_img}" width="600"/>'
 
 
-                #response = f"Eco(RAG): {str + thinkTrej}"
-                response = f"Eco(RAG): {str}"
+                response = f"Eco(RAG): {str + thinkTrej}"
+                #response = f"Eco(RAG): {str}"
                     
                 recordOutput(response)
                 
@@ -329,7 +329,7 @@ if st.session_state.role != "Select an option":
                     # Send the process data to the LLM and ask it to validate the user data for a policy maker audience.
                     elif st.session_state.role == "Policy Maker":
                         policy_instruction = "You are validating user data about environmental impact using real data. Use this process data to check the accuracy of the user data. \nRetrieved Data: " \
-                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a policy maker audience. Do not use Equations." \
+                            + str + "User data:" + prompt + "\n" + "Validate user data factually without making assumptions. Craft your answer to a policy maker audience and give an example for comparison. Do not use Equations." \
                             + " List the process name and location in after the answer."
                         str = model_4o(policy_instruction, False)["choices"][0]["message"]["content"]
                         thinkTrej = thinkTrej + "<br>LLM input: " + policy_instruction + "<br>LLM output: " + str
@@ -338,7 +338,7 @@ if st.session_state.role != "Select an option":
                 else:
                     str = "It looks like you asked a validation question. Answers vary based on location. Please ask your question again with a location specified."
                     
-                response = f"Eco(RAG): {str}"
+                response = f"Eco(RAG): {str + thinkTrej}"
                 recordOutput(response)
                 
             #If not a enviornmental impact question, route to GPT.
