@@ -9,6 +9,53 @@ import io
 import base64
 import matplotlib.pyplot as plt
 
+from io import BytesIO
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_LEFT
+from reportlab.lib.pagesizes import letter
+
+def export_as_pdf(conversation_memory):
+    pdf_buffer = BytesIO()
+    doc = SimpleDocTemplate(pdf_buffer, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    styles = getSampleStyleSheet()
+    
+    # Create custom styles
+    styles.add(ParagraphStyle(name='Bold', parent=styles['Normal'], fontName='Helvetica-Bold'))
+    custom_italic = ParagraphStyle('CustomItalic', parent=styles['Normal'], fontName='Helvetica-Oblique')
+    styles.add(custom_italic)
+    
+    story = []
+
+    # Add user role at the top of the PDF
+    role_paragraph = Paragraph(f"<b>Role:</b> {st.session_state.role}", styles['Bold'])
+    story.append(role_paragraph)
+    story.append(Spacer(1, 12))
+
+    for msg in conversation_memory:
+        if msg['role'] == 'user':
+            story.append(Paragraph(f"<b>User:</b>", styles['Bold']))
+            story.append(Paragraph(msg['content'], styles['Normal']))
+            story.append(Spacer(1, 12))
+        elif msg['role'] == 'assistant':
+            story.append(Paragraph(f"<b>Assistant:</b>", styles['Bold']))
+            content = msg['content']
+            content = content.replace('**Eco(RAG):**', '<b>Eco(RAG):</b>')
+            content = content.replace('**Eco(GPT):**', '<b>Eco(GPT):</b>')
+            content = content.replace('**Process details:**', '<b>Process details:</b>')
+            content = content.replace('**Process Name:**', '<b>Process Name:</b>')
+            content = content.replace('**Location:**', '<b>Location:</b>')
+            content = content.replace('**Reasoning:**', '<b>Reasoning:</b>')
+            paragraphs = content.split('\n\n')
+            for p in paragraphs:
+                story.append(Paragraph(p, styles['Normal']))
+                story.append(Spacer(1, 6))
+            story.append(Spacer(1, 12))
+
+    doc.build(story)
+    pdf_buffer.seek(0)
+    return pdf_buffer.getvalue()
+
 def render_homepage():
     st.title("🌿 Welcome to EcoValid")
     st.markdown("""
@@ -207,6 +254,15 @@ elif st.session_state.page == "chat":
             st.session_state.role = role
             st.session_state.conversation_memory = []  # Reset conversation when role changes
             st.rerun()
+        
+        if st.button("EXPORT CHAT"):
+            pdf = export_as_pdf(st.session_state.conversation_memory)
+            st.download_button(
+                label="Download PDF",
+                data=pdf,
+                file_name="chat_export.pdf",
+                mime="application/pdf"
+    )
         
 
 
