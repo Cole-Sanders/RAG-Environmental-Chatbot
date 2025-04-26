@@ -17,7 +17,7 @@ Settings.llm = LiteLLM(model="gpt-3.5-turbo",
 
 def loadDocs():
     name_documents = []
-    with open("project_root/backend/NameData.txt", "r") as f:
+    with open("project_root/backend/NameData.txt", "r", encoding="utf-8", errors="replace") as f:
 
         for line in f:
             line = line.strip()

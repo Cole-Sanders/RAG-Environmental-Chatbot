@@ -3,6 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from litellm import completion
+import html
 
 import re
 import io
@@ -46,6 +47,13 @@ def export_as_pdf(conversation_memory):
             content = content.replace('**Process Name:**', '<b>Process Name:</b>')
             content = content.replace('**Location:**', '<b>Location:</b>')
             content = content.replace('**Reasoning:**', '<b>Reasoning:</b>')
+            # Remove HTML image tags and excess whitespace
+            content = re.sub(r'<img[^>]+>', '', content)         # remove <img ...> tags
+            content = re.sub(r'<[^>]+>', '', content)            # remove other HTML tags (optional, but safe)
+            content = html.escape(content)                       # escape any special HTML characters
+            content = content.replace('\n', '<br />')  
+            # Remove base64 images or <img> tags
+            content = re.sub(r'<img[^>]*>', '', content)
             paragraphs = content.split('\n\n')
             for p in paragraphs:
                 story.append(Paragraph(p, styles['Normal']))
